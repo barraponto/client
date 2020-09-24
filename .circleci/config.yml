@@ -1,0 +1,10 @@
+version: 2.1
+orbs:
+  node: circleci/node@4.0.1
+workflows:
+  node-tests:
+    jobs:
+      - node/test:
+          version: lts
+      - node/test:
+          version: current
