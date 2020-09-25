@@ -5,6 +5,8 @@ workflows:
   node-tests:
     jobs:
       - node/test:
-          version: lts
-      - node/test:
-          version: current
+          matrix:
+            parameters:
+              version:
+                - lts
+                - current
