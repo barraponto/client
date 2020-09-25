@@ -10,3 +10,11 @@ workflows:
               version:
                 - lts
                 - current
+      - node/test:
+          version: lts
+          matrix:
+            parameters:
+              run-command:
+                - chromatic
+          requires:
+            - node/test-lts
