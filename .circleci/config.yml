@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@4.0.1
 workflows:
-  node-tests:
+  matchmaker:
     jobs:
       - node/test:
           matrix:
@@ -11,10 +11,14 @@ workflows:
                 - lts
                 - current
       - node/test:
+          name: chromatic
           version: lts
-          matrix:
-            parameters:
-              run-command:
-                - chromatic
+          run-command: chromatic
+          requires:
+            - node/test-lts
+      - node/test:
+          name: vercel
+          version: lts
+          run-command: vercel -- --token $VERCEL_AUTH_TOKEN
           requires:
             - node/test-lts
